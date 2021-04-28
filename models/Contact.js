@@ -15,10 +15,16 @@ module.exports = (sequelize, DataTypes) => {
 
   Contact.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
+      hubspotId: DataTypes.STRING,
     },
     {
       sequelize,
