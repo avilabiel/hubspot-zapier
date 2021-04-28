@@ -7,7 +7,6 @@ class ContactController {
 
     // const hubspotContact = await Hubspot.createContact(contact);
     // contact.hubspotId = hubspotContact.id;
-    console.log("Unpersisted Contact", contact);
     const persistedContact = await ContactModel.create(contact);
 
     return res.send({
