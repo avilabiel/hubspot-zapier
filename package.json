@@ -1,0 +1,19 @@
+{
+  "name": "hubspot-zapier",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/avilabiel/hubspot-zapier.git",
+  "author": "Gabriel Ávila <avilabiel@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  },
+  "scripts": {
+    "start-without-hubspot": "node hubspot_without_zapier/server.js"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
+  }
+}
