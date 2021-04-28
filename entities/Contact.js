@@ -1,7 +1,7 @@
 class Contact {
-  constructor({ id = null, name, email, phone, hubspotId = null }) {
+  constructor({ id = null, fullname, email, phone, hubspotId = null }) {
     this.id = id;
-    this.name = name;
+    this.fullname = fullname;
     this.email = email;
     this.phone = phone;
     this.hubspotId = hubspotId;

@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      name: DataTypes.STRING,
+      fullname: DataTypes.STRING,
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
       hubspotId: DataTypes.STRING,
