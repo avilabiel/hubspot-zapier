@@ -1,5 +1,6 @@
 const { Contact } = require("../entities");
 const { Contact: ContactModel } = require("../models");
+const { Hubspot } = require("../utils");
 
 class ContactController {
   static async create(req, res) {
