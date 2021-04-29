@@ -6,8 +6,10 @@ class ContactController {
   static async create(req, res) {
     const contact = new Contact(req.body);
 
-    // const hubspotContact = await Hubspot.createContact(contact);
-    // contact.hubspotId = hubspotContact.id;
+    const hubspotContact = await Hubspot.createContact(
+      Hubspot.buildFromContact(contact)
+    );
+    contact.hubspotId = hubspotContact.id;
     const persistedContact = await ContactModel.create(contact);
 
     return res.send({
