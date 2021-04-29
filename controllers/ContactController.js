@@ -16,8 +16,22 @@ class ContactController {
   }
 
   static async update(req, res) {
+    const { id: contactId } = req.params;
+    const persistedContact = await ContactModel.findOne({
+      where: { id: contactId },
+    });
+
+    for (let key in req.body) {
+      if (!persistedContact[key]) {
+        continue;
+      }
+
+      persistedContact[key] = req.body[key];
+    }
+    await persistedContact.save();
+
     return res.send({
-      contact: {},
+      contact: persistedContact,
     });
   }
 }

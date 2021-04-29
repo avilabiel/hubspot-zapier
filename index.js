@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/contact", ContactController.create);
-app.put("/contact", ContactController.update);
+app.put("/contact/:id", ContactController.update);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
