@@ -24,7 +24,14 @@ class Hubspot {
     return result.data;
   }
 
-  updateContact() {}
+  async updateContact(hubspotContact) {
+    const url = `/crm/v3/objects/contacts/${hubspotContact.id}?hapikey=${this.apiKey}`;
+    delete hubspotContact.id;
+
+    const result = await this.api.patch(url, { properties: hubspotContact });
+
+    return result.data;
+  }
 }
 
 module.exports = new Hubspot();

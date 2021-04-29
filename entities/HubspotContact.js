@@ -1,5 +1,14 @@
 class HubspotContact {
-  constructor({ firstname, lastname, email, phone, website, company }) {
+  constructor({
+    id = null,
+    firstname,
+    lastname,
+    email,
+    phone,
+    website,
+    company,
+  }) {
+    this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
@@ -13,6 +22,7 @@ class HubspotContact {
 
     contact.firstname = names[0];
     contact.lastname = names[names.length - 1];
+    contact.id = contact.hubspotId;
 
     return new HubspotContact(contact);
   }

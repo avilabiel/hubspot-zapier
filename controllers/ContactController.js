@@ -22,7 +22,9 @@ class ContactController {
     const persistedContact = await ContactModel.findOne({
       where: { id: contactId },
     });
+    const contact = new Contact(persistedContact);
 
+    await Hubspot.updateContact(Hubspot.buildFromContact(contact));
     for (let key in req.body) {
       if (!persistedContact[key]) {
         continue;
@@ -30,6 +32,7 @@ class ContactController {
 
       persistedContact[key] = req.body[key];
     }
+
     await persistedContact.save();
 
     return res.send({
