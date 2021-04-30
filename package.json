@@ -13,7 +13,8 @@
     "sequelize": "^6.6.2"
   },
   "scripts": {
-    "start-without-hubspot": "node hubspot_without_zapier/server.js"
+    "start-without-hubspot": "node hubspot_without_zapier/server.js",
+    "start": "node index.js"
   },
   "devDependencies": {
     "sequelize-cli": "^6.2.0"
