@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post("/contact", ContactController.create);
 app.put("/contact/:id", ContactController.update);
 app.post("/hubspot/webhooks", HubspotWebhooksController.create);
+app.post("/hubspot/webhooks/auth", HubspotWebhooksController.get);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

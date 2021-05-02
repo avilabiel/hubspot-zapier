@@ -4,7 +4,7 @@ const HubspotContact = require("../entities/HubspotContact");
 class Hubspot {
   constructor() {
     this.apiKey =
-      process.env.HUBSPOT_API_KEY || "15b333a3-8180-44cf-a43b-6e6eb99f99a2";
+      process.env.HUBSPOT_API_KEY || "d6cdb4e2-ab94-4bf6-94b7-e64bef46d4c5";
     this.appId = process.env.HUBSPOT_APP_ID || "283038";
     this.clientId =
       process.env.HUBSPOT_CLIENT_ID || "a62dc331-e7ae-4f66-b80d-33a59ed8ac3a";
