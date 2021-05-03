@@ -38,6 +38,14 @@ class Hubspot {
 
     return result.data;
   }
+
+  async getContactById(hubspotContactId) {
+    const url = `/crm/v3/objects/contacts/${hubspotContactId}?hapikey=${this.apiKey}`;
+
+    const result = await this.api.get(url);
+
+    return result.data;
+  }
 }
 
 module.exports = new Hubspot();
