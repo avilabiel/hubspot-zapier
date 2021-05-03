@@ -4,7 +4,6 @@ const {
   afters = [],
 } = require("./authentication");
 
-const contactResource = require("./resources/contact");
 const contactTrigger = require("./triggers/contact");
 
 module.exports = {
@@ -30,7 +29,5 @@ module.exports = {
   // If you want your creates to show up, you better include it here!
   creates: {},
 
-  resources: {
-    [contactResource.key]: contactResource,
-  },
+  resources: {},
 };

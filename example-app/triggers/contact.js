@@ -1,4 +1,4 @@
-const listRecipes = (z, bundle) => {
+const listContacts = (z, bundle) => {
   const promise = z.request("https://hubspot-zapier.herokuapp.com/contacts");
   return promise.then((response) => {
     z.console.log(response.json);
@@ -15,7 +15,7 @@ module.exports = {
     description: "Trigger when a new contact is added.",
   },
   operation: {
-    perform: listRecipes,
+    perform: listContacts,
     sample: {
       id: 4,
       fullname: "Gabriel Ávila",
