@@ -15,6 +15,14 @@ So, the main goal here is to create:
     - How much time did it take?
     - How complex was it?
 
+## URL
+
+You can find this API working here: https://hubspot-zapier.herokuapp.com/.
+
+## Insomnia
+
+If you want to test it locally, enjoy it! Feel free to download the [Insomnia.json]() and import into your Insomnia.
+
 ## Stack
 
 ### Not using Zapier CLI
