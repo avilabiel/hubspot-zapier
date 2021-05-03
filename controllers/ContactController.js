@@ -64,6 +64,12 @@ class ContactController {
 
     return res.send({ success: true, contact });
   }
+
+  static async getAll(req, res) {
+    const contacts = await ContactModel.findAll();
+
+    return res.send({ success: true, contacts });
+  }
 }
 
 module.exports = ContactController;
