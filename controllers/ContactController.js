@@ -56,6 +56,14 @@ class ContactController {
         .send({ success: false, message: "Internal Server Error" });
     }
   }
+
+  static async get(req, res) {
+    const { id } = req.params;
+
+    const contact = await ContactModel.findOne({ where: { id } });
+
+    return res.send({ success: true, contact });
+  }
 }
 
 module.exports = ContactController;

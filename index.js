@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post("/contact", ContactController.create);
 app.put("/contact/:id", ContactController.update);
+app.get("/contact/:id", ContactController.get);
 app.post("/hubspot/webhooks", HubspotWebhooksController.create);
 app.post("/hubspot/webhooks/auth", HubspotWebhooksController.get);
 
