@@ -21,7 +21,7 @@ You can find this API working here: https://hubspot-zapier.herokuapp.com/.
 
 ## Insomnia
 
-If you want to test it locally, enjoy it! Feel free to download the [Insomnia.json]() and import into your Insomnia.
+If you want to test it locally, enjoy it! Feel free to download the [Insomnia.json](https://github.com/avilabiel/hubspot-zapier/blob/main/Insomnia.json) and import into your Insomnia.
 
 ## Stack
 
