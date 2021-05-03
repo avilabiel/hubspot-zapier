@@ -15,7 +15,7 @@ const handleBadResponses = (response, z, bundle) => {
   if (response.status === 401) {
     throw new z.errors.Error(
       // This message is surfaced to the user
-      'The username and/or password you supplied is incorrect',
+      'The API Key you supplied is incorrect',
       'AuthenticationError',
       response.status
     );
@@ -24,15 +24,30 @@ const handleBadResponses = (response, z, bundle) => {
   return response;
 };
 
+// This function runs before every outbound request. You can have as many as you
+// need. They'll need to each be registered in your index.js file.
+const includeApiKey = (request, z, bundle) => {
+  if (bundle.authData.apiKey) {
+    // Use these lines to include the API key in the querystring
+    request.params = request.params || {};
+    request.params.api_key = bundle.authData.apiKey;
+
+    // If you want to include the API key in the header instead, uncomment this:
+    // request.headers.Authorization = bundle.authData.apiKey;
+  }
+
+  return request;
+};
+
 module.exports = {
   config: {
-    // "basic" auth automatically creates "username" and "password" input fields. It
-    // also registers default middleware to create the authentication header.
-    type: 'basic',
+    // "custom" is the catch-all auth type. The user supplies some info and Zapier can
+    // make authenticated requests with it
+    type: 'custom',
 
     // Define any input app's auth requires here. The user will be prompted to enter
     // this info when they connect their account.
-    fields: [],
+    fields: [{ key: 'apiKey', label: 'API Key', required: true }],
 
     // The test method allows Zapier to verify that the credentials a user provides
     // are valid. We'll execute this method whenever a user connects their account for
@@ -47,6 +62,6 @@ module.exports = {
     // in `bundle.inputData.X`.
     connectionLabel: '{{json.username}}',
   },
-  befores: [],
+  befores: [includeApiKey],
   afters: [handleBadResponses],
 };
