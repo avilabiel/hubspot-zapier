@@ -33,7 +33,7 @@ class HubspotWebhooksController {
         if (key === "id" || key === "hubspotId") {
           continue;
         }
-        console.log({ key, value, persisted: persistedContact.toJSON() });
+
         persistedContact[key] = contact[key];
       }
 
