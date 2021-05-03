@@ -7,7 +7,7 @@ const appTester = zapier.createAppTester(App);
 
 describe("triggers", () => {
   describe("new contact trigger", () => {
-    it("should load contact from fake hook", (done) => {
+    it("should load contacts from API", (done) => {
       const bundle = {
         inputData: {
           style: "mediterranean",
@@ -21,11 +21,18 @@ describe("triggers", () => {
 
       appTester(App.triggers.contact.operation.perform, bundle)
         .then((results) => {
-          expect(results.length).toBe(1);
+          expect(results.length).not.toBe(undefined);
 
           const firstContact = results[0];
-          expect(firstContact.name).toBe("name 1");
-          expect(firstContact.directions).toBe("directions 1");
+          expect(firstContact).toMatchObject({
+            id: 4,
+            fullname: "Gabriel Ávila",
+            email: "avilabiel9@gmail.com",
+            phone: "+5511983772607",
+            hubspotId: "451",
+            createdAt: "2021-05-03T11:52:13.000Z",
+            updatedAt: "2021-05-03T15:45:20.000Z",
+          });
 
           done();
         })
