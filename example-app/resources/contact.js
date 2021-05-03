@@ -1,94 +1,100 @@
 // get a list of contacts
 const performList = async (z, bundle) => {
   const response = await z.request({
-    url: 'https://jsonplaceholder.typicode.com/posts',
+    url: "https://jsonplaceholder.typicode.com/posts",
     params: {
-      order_by: 'id desc'
-    }
+      order_by: "id desc",
+    },
   });
-  return response.data
+  return response.data;
 };
 
 // find a particular contact by name (or other search criteria)
 const performSearch = async (z, bundle) => {
   const response = await z.request({
-    url: 'https://jsonplaceholder.typicode.com/posts',
+    url: "https://jsonplaceholder.typicode.com/posts",
     params: {
-      name: bundle.inputData.name
-    }
+      name: bundle.inputData.name,
+    },
   });
-  return response.data
+  return response.data;
 };
 
 // creates a new contact
 const performCreate = async (z, bundle) => {
+  const fullname = `${bundle.inputData.properties?.firstname} ${bundle.inputData.properties?.lastname}`;
+
   const response = await z.request({
-    method: 'POST',
-    url: 'https://jsonplaceholder.typicode.com/posts',
+    method: "POST",
+    url: "https://hubspot-zapier.herokuapp.com/contact",
     body: {
-      name: bundle.inputData.name // json by default
-    }
+      ...bundle.inputData.properties,
+      fullname,
+    },
   });
-  return response.data
+
+  return response.data;
+};
+
+// updates a new contact
+const performUpdate = async (z, bundle) => {
+  const response = await z.request({
+    method: "PUT",
+    url:
+      "https://hubspot-zapier.herokuapp.com/contact/hubspotId/" +
+      bundle.inputData.hubspotId,
+    body: {
+      name: bundle.inputData.contactId,
+    },
+  });
+  return response.data;
 };
 
 module.exports = {
-  // see here for a full list of available properties:
-  // https://github.com/zapier/zapier-platform/blob/master/packages/schema/docs/build/schema.md#resourceschema
-  key: 'contact',
-  noun: 'Contact',
-
-  // If `get` is defined, it will be called after a `search` or `create`
-  // useful if your `searches` and `creates` return sparse objects
-  // get: {
-  //   display: {
-  //     label: 'Get Contact',
-  //     description: 'Gets a contact.'
-  //   },
-  //   operation: {
-  //     inputFields: [
-  //       {key: 'id', required: true}
-  //     ],
-  //     perform: defineMe
-  //   }
-  // },
+  key: "contact",
+  noun: "Contact",
 
   list: {
     display: {
-      label: 'New Contact',
-      description: 'Lists the contacts.'
+      label: "New Contact",
+      description: "Lists the contacts.",
     },
     operation: {
       perform: performList,
-      // `inputFields` defines the fields a user could provide
-      // Zapier will pass them in as `bundle.inputData` later. They're optional on triggers, but required on searches and creates.
-      inputFields: []
-    }
+      inputFields: [],
+    },
   },
 
   search: {
     display: {
-      label: 'Find Contact',
-      description: 'Finds a contact give.'
+      label: "Find Contact",
+      description: "Finds a contact give.",
     },
     operation: {
-      inputFields: [
-        {key: 'name', required: true}
-      ],
-      perform: performSearch
+      inputFields: [{ key: "name", required: true }],
+      perform: performSearch,
     },
   },
 
   create: {
     display: {
-      label: 'Create Contact',
-      description: 'Creates a new contact.'
+      label: "Create Contact",
+      description: "Creates a new contact.",
     },
     operation: {
-      inputFields: [
-        {key: 'name', required: true}
-      ],
-      perform: performCreate
+      inputFields: [{ key: "name", required: true }],
+      perform: performCreate,
+    },
+  },
+
+  update: {
+    display: {
+      label: "Update Contact",
+      description: "Updates a contact.",
+    },
+    operation: {
+      inputFields: [{ key: "hubspotId", required: true }],
+      perform: performUpdate,
     },
   },
 
@@ -97,8 +103,18 @@ module.exports = {
   // returned records, and have obvious placeholder values that we can show to any user.
   // In this resource, the sample is reused across all methods
   sample: {
-    id: 1,
-    name: 'Test'
+    id: "451",
+    properties: {
+      createdate: "2021-05-03T11:52:12.704Z",
+      email: "avilabiel9@gmail.com",
+      firstname: "Gabriel",
+      hs_object_id: "451",
+      lastmodifieddate: "2021-05-03T15:45:05.119Z",
+      lastname: "Ávila",
+    },
+    createdAt: "2021-05-03T11:52:12.704Z",
+    updatedAt: "2021-05-03T15:45:05.119Z",
+    archived: false,
   },
 
   // If fields are custom to each user (like spreadsheet columns), `outputFields` can create human labels
@@ -107,7 +123,10 @@ module.exports = {
   // Alternatively, a static field definition can be provided, to specify labels for the fields
   // In this resource, these output fields are reused across all resources
   outputFields: [
-    {key: 'id', label: 'ID'},
-    {key: 'name', label: 'Name'}
-  ]
+    { key: "id", label: "ID" },
+    { key: "properties", label: "Properties" },
+    { key: "createdAt", label: "Created At" },
+    { key: "updatedAt", label: "Updated At" },
+    { key: "archived", label: "Archived" },
+  ],
 };
